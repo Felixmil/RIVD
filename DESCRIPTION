@@ -1,5 +1,5 @@
 Package: RIVD
-Title: A package for computing IVD assay's performances as required by regulations.
+Title: A package for computing IVD assay's performances as required by regulations
 Version: 0.0.0.9000
 Authors@R: 
     person(given = "First",
@@ -7,7 +7,7 @@ Authors@R:
            role = c("aut", "cre"),
            email = "first.last@example.com",
            comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
+Description: The goal of RIVD is to deliver simple tools and adapted outputs for in vitro diagnostic (IVD) assay performances assessment. The results can be used in early assay development phase or hopefully with compliance with regulatory frameworks. The package is built according to the recommandation formulated in the CLSI guidelines.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
