@@ -45,7 +45,7 @@ library(magrittr)
 
 data(Glucose,package="VCA")
 
-perfPrecision(Glucose, 'result','run', 'day') %>% kable()
+kable(perfPrecision(Glucose, 'result','run', 'day'))
 ```
 
 |         |       DF |    %Total |       SD |   CV\[%\] |
