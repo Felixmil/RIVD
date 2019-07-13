@@ -42,6 +42,7 @@ Performance report for assay’s precision.
 library(RIVD)
 library(knitr)
 library(magrittr)
+
 data(Glucose,package="VCA")
 
 perfPrecision(Glucose, 'result','run', 'day') %>% kable()
