@@ -41,7 +41,6 @@ devtools::install_github("Felixmil/RIVD")
 ``` r
 library(RIVD)
 library(knitr)
-library(magrittr)
 
 data(Glucose,package="VCA")
 
