@@ -2,7 +2,7 @@
 % Please edit documentation in R/performances.R
 \name{perfPrecision}
 \alias{perfPrecision}
-\title{perfRepet}
+\title{perfPrecision}
 \usage{
 perfPrecision(df, x, run, day)
 }
@@ -22,6 +22,7 @@ dataframe containing main statistics on variance
 Computes Assay Precision according to CLSI EP05-A3.
 }
 \details{
+Heavily relies on the VCA package for computing the variance component analysis.
 references: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2556577/
 }
 \examples{

@@ -1,7 +1,8 @@
-#' perfRepet
+#' perfPrecision
 #' 
 #' Computes Assay Precision according to CLSI EP05-A3.
 #' 
+#' Heavily relies on the VCA package for computing the variance component analysis.
 #' references: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2556577/
 #' 
 #' @param df dataframe 
@@ -25,7 +26,11 @@ perfPrecision <- function(df, x, run, day) {
     anovaVCA(reformulate(paste(day,'/',run), response = x), 
              df)
   
-    as.data.frame(res[["aov.tab"]])[c(1,5,6,7)]
+    res <- as.data.frame(res[["aov.tab"]])[c(1,5,6,7)]
+    
+    rownames(res) = c('Withing laboratory', 'within-day', 'within-run', 'error')
+    
+    res
   
 ## Tried to reimplement  manually but found the VCA package
 # n_day <-  n_distinct(df %>% select(!!day))

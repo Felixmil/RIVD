@@ -6,15 +6,18 @@
 <!-- badges: start -->
 
 <!-- badges: end -->
->*There's [R/Pharma](http://rinpharma.com) and [R/medicine](https://r-medicine.com), now, let's get R/IVD started :sunglasses:*
 
-The goal of RIVD is to deliver **simple tools** and **adapted outputs** for *in
-vitro diagnostic* (IVD) assays performances assessment. The results can be
-used in early development phase, or *hopefully* for building a validation report in 
-compliance with regulatory frameworks. The package is intended to follow the
-recommendations formulated in the **[CLSI guidelines](https://clsi.org)**.
+> *There’s [R/Pharma](http://rinpharma.com) and
+> [R/medicine](https://r-medicine.com), now, let’s get R/IVD started
+> :sunglasses:*
 
-
+The goal of RIVD is to deliver **simple tools** and **adapted outputs**
+for *in vitro diagnostic* (IVD) assays performances assessment. The
+results can be used in early development phase, or *hopefully* for
+building a validation report in compliance with regulatory frameworks.
+The package is intended to follow the recommendations formulated in the
+**[CLSI
+guidelines](https://clsi.org)**.
 
 ## Installation
 
@@ -54,10 +57,11 @@ kable(perfPrecision(Glucose, 'result','run', 'day'))
 | day:run | 20.00000 |  23.77537 | 1.753568 | 0.7180867 |
 | error   | 40.00000 |  61.08144 | 2.810694 | 1.1509803 |
 
-### Plot for precision assessment protocol
+Plot of data points
 
 ``` r
 library(RIVD)
+
 data(Glucose,package="VCA")
 plotPrecision(Glucose, 'result','run', 'day')
 ```
