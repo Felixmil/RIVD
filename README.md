@@ -11,8 +11,8 @@
 The goal of RIVD is to deliver **simple tools** and **adapted outputs** for *in
 vitro diagnostic* (IVD) assays performances assessment. The results can be
 used in early development phase, or *hopefully* for building a validation report in 
-compliance with regulatory frameworks. The package is built according to the
-recommendations formulated in the **CLSI guidelines**.
+compliance with regulatory frameworks. The package is intended to follow the
+recommendations formulated in the **[CLSI guidelines](https://clsi.org)**.
 
 
 
