@@ -6,7 +6,7 @@
 <!-- badges: start -->
 
 <!-- badges: end -->
->*There's [R/Pharma](http://rinpharma.com) and [R/medicin](https://r-medicine.com), now, let's get R/IVD started :sunglasses:*
+>*There's [R/Pharma](http://rinpharma.com) and [R/medicine](https://r-medicine.com), now, let's get R/IVD started :sunglasses:*
 
 The goal of RIVD is to deliver **simple tools** and **adapted outputs** for *in
 vitro diagnostic* (IVD) assays performances assessment. The results can be
