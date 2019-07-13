@@ -36,7 +36,7 @@ devtools::install_github("Felixmil/RIVD")
 
 ## Examples
 
-### Performance report for assay’s precision.
+### Performance table for assay’s precision.
 
 ``` r
 library(RIVD)
@@ -54,7 +54,7 @@ kable(perfPrecision(Glucose, 'result','run', 'day'))
 | day:run | 20.00000 |  23.77537 | 1.753568 | 0.7180867 |
 | error   | 40.00000 |  61.08144 | 2.810694 | 1.1509803 |
 
-### Precision's data points
+### Plot for precision assessment protocol
 
 ``` r
 library(RIVD)
