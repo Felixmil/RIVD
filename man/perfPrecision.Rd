@@ -4,16 +4,18 @@
 \alias{perfPrecision}
 \title{perfPrecision}
 \usage{
-perfPrecision(df, x, run, day)
+perfPrecision(df, x, run, day, by = NULL)
 }
 \arguments{
 \item{df}{dataframe}
 
-\item{x}{column name of the value to evaluate}
+\item{x}{string. column name of the value to evaluate}
 
-\item{run}{column name where run ids are stored}
+\item{run}{string. column name where run ids are stored}
 
-\item{day}{column name where days ids are stored}
+\item{day}{string. column name where days ids are stored}
+
+\item{by}{string, default to NULL. column name of a slicing variable. Use by if the table contains a variable to repeat the analysis on (for example a QC level or a gold-standard identification variable). If by is used, a list containing one result per slice level is returned.}
 }
 \value{
 dataframe containing main statistics on variance
