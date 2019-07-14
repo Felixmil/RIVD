@@ -10,6 +10,7 @@
 #' @param day string. column name where days ids are stored
 #' @param run string. column name where run ids are stored
 #' @param by string, default to NULL. column name of a slicing variable. Use by if the table contains a variable to repeat the analysis on (for example a QC level or a gold-standard identification variable). If by is used, a list containing one result per slice level is returned.
+#'@param site string, column name where sites ids are stored. If site is not null, the outputs gives back reproducibility performances.
 #'
 #' @return dataframe containing main statistics on variance
 #' @export 
@@ -22,26 +23,51 @@
 #' data(Glucose,package="VCA")
 #' perfPrecision(Glucose, 'result','run', 'day')
 #' 
-perfPrecision <- function(df, x, run, day, by=NULL) {
+perfPrecision <- function(df, x, run, day, by = NULL, site = NULL) {
+  
+  formula <-
+    if(is.null(site)){
+      paste(day,'/',run)
+    } else {
+      paste(site,'/',day,'/',run)
+    }
   
   res <- 
-    anovaVCA(reformulate(paste(day,'/',run), response = x), 
+    anovaVCA(reformulate(formula, response = x), 
              Data = df,
              by = by)
   
   if (length(res) > 1 & names(res[1]) != 'call'){
     precisionResults <- list()
     for (i in seq_along(res)) {
-      
-      precisionResults[[names(res[i])]] <- as.data.frame(res[[i]][["aov.tab"]])[c(1,5,6,7)]
-      
-      rownames(precisionResults[[names(res[i])]]) = c('Withing laboratory', 'within-day', 'within-run', 'error')
-      
+      precisionResults[[names(res[i])]] <- as.data.frame(res[[i]][["aov.tab"]])[,c(1,4,5,6,7)]
+      if(!is.null(site)){
+        precisionResults[[i]]['within laboratory','SD'] = c(sqrt(sum(precisionResults[[i]][c('site:day','site:day:run','error'),"VC"])))
+        precisionResults[[i]]['within laboratory','CV[%]'] = c(sqrt(sum(precisionResults[[i]][c('site:day', 'site:day:run','error'),"VC"])))/res[[i]]$Mean*100
+        rownames(precisionResults[[i]])[grepl('^total$',rownames(precisionResults[[i]]))] = 'reproducibility'
+      } else {
+        rownames(precisionResults[[i]])[grepl('^total$',rownames(precisionResults[[i]]))] = 'repetability'
+      }
+      rownames(precisionResults[[i]])[grepl('^site$',rownames(precisionResults[[i]]))] = 'between laboratory'
+      rownames(precisionResults[[i]])[grepl('^site:day$',rownames(precisionResults[[i]]))] = 'within day'
+      rownames(precisionResults[[i]])[grepl('^day$',rownames(precisionResults[[i]]))] = 'within day'
+      rownames(precisionResults[[i]])[grepl('^day:run$',rownames(precisionResults[[i]]))] = 'within run'
+      rownames(precisionResults[[i]])[grepl('^side:day:run$',rownames(precisionResults[[i]]))] = 'within run'
     }
   } else {
-    precisionResults <- as.data.frame(res[["aov.tab"]])[c(1,5,6,7)]
-    
-    rownames(precisionResults) = c('Withing laboratory', 'within-day', 'within-run', 'error')
+    precisionResults <- as.data.frame(res[["aov.tab"]])[c(1,4, 5,6,7)]
+    if(!is.null(site)){
+      precisionResults['repeatability','SD'] = c(sqrt(sum(precisionResults[c('site:day','site:day:run','error'),"VC"])))
+      precisionResults['repeatability','CV[%]'] = c(sqrt(sum(precisionResults[c('site:day', 'site:day:run','error'),"VC"])))/res$Mean*100
+      rownames(precisionResults)[grepl('^total$',rownames(precisionResults))] = 'reproducibility'
+      rownames(precisionResults)[grepl('^site$',rownames(precisionResults))] = 'between laboratory'
+      rownames(precisionResults)[grepl('^site\\:day$',rownames(precisionResults))] = 'within day'
+      rownames(precisionResults)[grepl('^site\\:day\\:run$',rownames(precisionResults))] = 'within run'
+    } else {
+      rownames(precisionResults)[grepl('^total$',rownames(precisionResults))] = 'repetability'
+    }
+    rownames(precisionResults)[grepl('^day$',rownames(precisionResults))] = 'within day'
+    rownames(precisionResults)[grepl('^day:run$',rownames(precisionResults))] = 'within run'
   }
   
   return(precisionResults)

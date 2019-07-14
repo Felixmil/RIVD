@@ -4,7 +4,7 @@
 \alias{perfPrecision}
 \title{perfPrecision}
 \usage{
-perfPrecision(df, x, run, day, by = NULL)
+perfPrecision(df, x, run, day, by = NULL, site = NULL)
 }
 \arguments{
 \item{df}{dataframe}
@@ -16,6 +16,8 @@ perfPrecision(df, x, run, day, by = NULL)
 \item{day}{string. column name where days ids are stored}
 
 \item{by}{string, default to NULL. column name of a slicing variable. Use by if the table contains a variable to repeat the analysis on (for example a QC level or a gold-standard identification variable). If by is used, a list containing one result per slice level is returned.}
+
+\item{site}{string, column name where sites ids are stored. If site is not null, the outputs gives back reproducibility performances.}
 }
 \value{
 dataframe containing main statistics on variance
