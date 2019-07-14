@@ -10,5 +10,6 @@ test_that("Precision works", {
   expect_equal(round(perfPrecision(Glucose, 'result','run', 'day')[1,1],2),round(64.77732,2))
   expect_equal(names(perfPrecision(Glucose2, 'result','run', 'day', by='lot')[2]), "lot.B")
   expect_equal(round(perfPrecision(Glucose3, 'result','run', 'day', site= 'site')['repeatability','CV[%]'],2), round(1.461133,2))
+  expect_equal(rownames(perfPrecision(Glucose3, 'result','run', 'day', site = 'site', by = 'lot')[[2]])[6], "repeatability")
   
 })

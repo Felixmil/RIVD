@@ -42,8 +42,8 @@ perfPrecision <- function(df, x, run, day, by = NULL, site = NULL) {
     for (i in seq_along(res)) {
       precisionResults[[names(res[i])]] <- as.data.frame(res[[i]][["aov.tab"]])[,c(1,4,5,6,7)]
       if(!is.null(site)){
-        precisionResults[[i]]['within laboratory','SD'] = c(sqrt(sum(precisionResults[[i]][c('site:day','site:day:run','error'),"VC"])))
-        precisionResults[[i]]['within laboratory','CV[%]'] = c(sqrt(sum(precisionResults[[i]][c('site:day', 'site:day:run','error'),"VC"])))/res[[i]]$Mean*100
+        precisionResults[[i]]['repeatability','SD'] = c(sqrt(sum(precisionResults[[i]][c('site:day','site:day:run','error'),"VC"])))
+        precisionResults[[i]]['repeatability','CV[%]'] = c(sqrt(sum(precisionResults[[i]][c('site:day', 'site:day:run','error'),"VC"])))/res[[i]]$Mean*100
         rownames(precisionResults[[i]])[grepl('^total$',rownames(precisionResults[[i]]))] = 'reproducibility'
       } else {
         rownames(precisionResults[[i]])[grepl('^total$',rownames(precisionResults[[i]]))] = 'repetability'
@@ -52,7 +52,7 @@ perfPrecision <- function(df, x, run, day, by = NULL, site = NULL) {
       rownames(precisionResults[[i]])[grepl('^site:day$',rownames(precisionResults[[i]]))] = 'within day'
       rownames(precisionResults[[i]])[grepl('^day$',rownames(precisionResults[[i]]))] = 'within day'
       rownames(precisionResults[[i]])[grepl('^day:run$',rownames(precisionResults[[i]]))] = 'within run'
-      rownames(precisionResults[[i]])[grepl('^side:day:run$',rownames(precisionResults[[i]]))] = 'within run'
+      rownames(precisionResults[[i]])[grepl('^site:day:run$',rownames(precisionResults[[i]]))] = 'within run'
     }
   } else {
     precisionResults <- as.data.frame(res[["aov.tab"]])[c(1,4, 5,6,7)]
